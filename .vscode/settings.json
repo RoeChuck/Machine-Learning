@@ -1,3 +1,4 @@
 {
-  "cSpell.ignoreWords": ["sklearn", "streamlit"]
+  "cSpell.ignoreWords": ["sklearn", "streamlit"],
+  "cSpell.words": ["dataframe"]
 }

@@ -13,11 +13,28 @@ from sklearn.metrics import precision_score, recall_score
 
 @st.cache(persist=True)
 def load_data():
+    """
+    Load data from csv file
+    
+    Returns: LabelEncoded dataframe
+    """
     data = pd.read_csv("mushrooms.csv")
     label = LabelEncoder() # LabelEncoder is used to convert categorical data to numerical data
     for col in data.columns:
         data[col] = label.fit_transform(data[col]) 
     return data
+
+@st.cache(persist=True)
+def split_data(df):
+    """
+    Split data into training and test set
+    
+    Returns: training and test dataframes
+    """
+    x = df.drop("type", axis=1) # drop type column from x
+    y = df["type"]
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3, random_state=0)
+    return x_train, x_test, y_train, y_test
 
 # <--------------------------Load Data-------------------------------->
 
@@ -25,6 +42,11 @@ data = load_data()
 original_data = pd.read_csv("mushrooms.csv")
 
 # <-------------------------Streamlit App------------------------------>
+
 st.title("Machine Learning Streamlit Web App")
 st.sidebar.title("Machine Learning Streamlit Web App")
 st.markdown("""Using binary classification to differentiate between edible and poisonous mushrooms""")
+
+if st.checkbox("Show raw data"):
+    st.subheader("Raw Data")
+    st.write(data)
