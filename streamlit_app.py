@@ -112,11 +112,6 @@ if classifier == "Support Vector Machine (SVM)":
 if classifier == "Logistic Regression":
     st.sidebar.subheader("Model Hyperparameters")
     C = st.sidebar.slider("C (Regularization Parameter)", 0.01, 10.0, 0.1)
-
-    """
-    C is regularization parameter. It controls the strength of regularization. 
-    The smaller the value of C, the less regularization is used.
-    """
     max_iter = st.sidebar.slider("Maximum number of iterations", 100, 500, key="max_iter")
     metrics = st.sidebar.multiselect("What metrics to plot?", ("Confusion Matrix", "ROC Curve", 
                                     "Precision-Recall Curve"))
